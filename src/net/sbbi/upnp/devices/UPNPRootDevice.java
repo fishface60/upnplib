@@ -358,6 +358,9 @@ public class UPNPRootDevice extends UPNPDevice {
 	 */
 	private void fillUPNPServicesList(UPNPDevice device, JXPathContext deviceCtx) throws MalformedURLException {
 		Pointer serviceListPtr = deviceCtx.getPointer("upnp:serviceList");
+		if (serviceListPtr == null) {
+			return;
+		}
 		JXPathContext serviceListCtx = deviceCtx.getRelativeContext(serviceListPtr);
 		Double arraySize = (Double) serviceListCtx.getValue("count( upnp:service )");
 		if (log.isDebugEnabled())
